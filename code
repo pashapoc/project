@@ -1,0 +1,125 @@
+#include <string>
+#include <iostream>
+#include <math.h>
+#include <vector>
+using namespace std;
+    
+    class Flower
+    {
+        public:
+        Flower();
+        string n;
+        string h;
+        string s;
+        string c;
+        int p;
+        double dr;
+        double q;
+        Flower(string n, string h, string s, string c, int p, double dr, double q)
+        {
+        this -> n=n;
+        this -> h=h;
+        this -> s=s;
+        this -> c=c;
+        this -> p=p;
+        this -> dr=dr; 
+        this -> q=q;
+        }
+    };
+    class FlowerBoutique
+    {
+        public:
+        vector<Flower> flowerBoutique;
+        void getVector()
+        {
+            flowerBoutique.push_back(Flower ("Chamomile", "60sm", "average", "white", 15, 0.95, 140));
+            flowerBoutique.push_back(Flower ("Rose", "70sm", "big", "red", 50, 0.95, 180));
+            flowerBoutique.push_back(Flower ("Chrysanthemum", "100sm", "big", "yellow", 30, 0.8, 120));
+            flowerBoutique.push_back(Flower ("Iris", "80sm", "big", "blue", 40, 0.8, 90));
+            flowerBoutique.push_back(Flower ("Carnation", "50sm", "average", "red", 30, 1, 100));
+            flowerBoutique.push_back(Flower ("Gladiolus", "120sm", "giant", "pink", 70, 0.8, 50));
+        }
+        int TheMostExpensive()
+        {
+            for(int B=0; B<flowerBoutique.size(); B++)
+            {
+                for(int F=0; F<flowerBoutique.size()-1; F++)
+                {
+                    if(flowerBoutique[F].p<flowerBoutique[F+1].p)
+                    {
+                        swap(flowerBoutique[F], flowerBoutique[F+1]);
+                    }
+                }                
+            }
+            for(int B=0; B<flowerBoutique.size(); B++)
+            {
+                cout << flowerBoutique[B].n << '\t';
+                cout << flowerBoutique[B].h << '\t';
+                cout << flowerBoutique[B].s << '\t';
+                cout << flowerBoutique[B].c << '\t';
+                cout << flowerBoutique[B].p << '\t';
+                cout << flowerBoutique[B].dr << '\t';
+                cout << flowerBoutique[B].q << endl;
+            }
+        }
+        void AddVector(string n, string h, string s, string c, int p, double dr, double q)
+        {
+            flowerBoutique.push_back(Flower (n, h, s, c, p, dr, q));
+        }
+        void DeleteVector(string nameid)
+        {
+            for(int B=0; B<flowerBoutique.size(); B++)
+            {
+                if(flowerBoutique[B].n == nameid)
+                {
+                    flowerBoutique.erase(flowerBoutique.begin() + B);
+                }
+            }
+        }
+    };
+    class Bouquet
+    {
+        public:
+        vector<Flower> flower;
+        void getVector()
+        {
+            flower.push_back(Flower ("Chamomile", "60sm", "average", "white", 15, 0.95, 140));
+            flower.push_back(Flower ("Rose", "70sm", "big", "red", 50, 0.95, 180));
+            flower.push_back(Flower ("Chrysanthemum", "100sm", "big", "yellow", 30, 0.8, 120));
+            flower.push_back(Flower ("Iris", "80sm", "big", "blue", 40, 0.8, 90));
+            flower.push_back(Flower ("Carnation", "50sm", "average", "red", 30, 1, 100));
+            flower.push_back(Flower ("Gladiolus", "120sm", "giant", "pink", 70, 0.8, 50));
+        }
+        int BouquetCount()
+        {
+            for (int B=0; B<flower.size(); B++)
+            {
+                cout << flower[B].n << endl;
+                cin >> flower[B].q;
+            }
+        };
+        int PriceCount()
+        {
+            int sum=0;
+            for (int B=0; B<flower.size(); B++)
+            {
+                if (flower[B].q>0)
+                {
+                    sum+=flower[B].q*flower[B].p;
+                }
+            }
+            cout << sum << "uah" << endl;
+        }
+    };
+    int main()
+    {
+        Bouquet bouquetobj;
+        bouquetobj.getVector();
+        bouquetobj.BouquetCount();
+        bouquetobj.PriceCount();
+        FlowerBoutique top;
+        top.getVector();/*pum purum pum pum*/
+        top.TheMostExpensive();
+        top.AddVector("Hui", "20sm", "avarage", "white", 200, 0.70, 150);
+        top.DeleteVector("Chamomile");
+    }    
